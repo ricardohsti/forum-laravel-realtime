@@ -13,7 +13,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\User::class, function (Faker $faker) {
+$faker = \Faker\Factory::create('pt_BR');
+
+$factory->define(App\Models\User::class, function () use ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
@@ -22,7 +24,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Models\Thread::class, function (Faker $faker) {
+$factory->define(App\Models\Thread::class, function () use ($faker) {
     return [
         'title' => $faker->sentence,
         'body' => implode(' ', $faker->paragraphs),
@@ -32,7 +34,7 @@ $factory->define(App\Models\Thread::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Models\Reply::class, function (Faker $faker) {
+$factory->define(App\Models\Reply::class, function () use ($faker) {
     return [
         'body' => implode(' ', $faker->paragraphs),
         'user_id' => function () {
